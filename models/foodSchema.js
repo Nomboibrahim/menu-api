@@ -3,10 +3,12 @@ const foodSchema = mongoose.Schema({
     name:{
         type:String,
         require:true
+    
     },
     type:{
         type:String,
         require:true
+    
     },
     time:{
         type:Date,
@@ -15,13 +17,13 @@ const foodSchema = mongoose.Schema({
     },
     ingredients:{
         type:Array,
-        required:true
+        require:true
     },
     recipe:{
         type:Array,
         require:true
-    },  
-  },{        
+    }  
+  },{       
         timestamps:true
 }
 )
