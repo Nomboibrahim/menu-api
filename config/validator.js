@@ -1,5 +1,5 @@
 const yup =require("yup");
-
+ 
 function validate(data){
 const userSchema =yup.object().shape({
     username: yup.string().required('username cannot be null').min(3).max(20),
