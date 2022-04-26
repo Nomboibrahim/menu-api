@@ -3,7 +3,7 @@ const morgan = require("morgan")
 require("dotenv").config()
 const connectDB =  require("./config/connectDB")
 const foodRoute= require("./routes/foodRoute")
-const userRouter = require("./routes/userRoute");
+const userRoute = require("./routes/userRoute");
 const db =require("./config/validator");
 db();
 
@@ -14,7 +14,7 @@ connectDB()
 
 //Middlewares
 app.use(express.json())
-app.use(morgan("dev"))
+app.use("/api/foods", foodRoute);
 app.use(foodRoute)
 
 

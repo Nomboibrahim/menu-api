@@ -2,6 +2,7 @@ const User =require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 const validate =require("../config/validator");
 const { generateToken } = require("../utils/generateToken");
+const { token } = require("morgan");
 
 
 //create a new user
@@ -28,9 +29,41 @@ const createUser = async(req, res )=>{
 
     } else{
         res.status(400).json({
-           massage:"Invalid data", 
+           massage:"Invalid ", 
         });
     }
 
 };
-module.exports= {createUser}
+//auth a user
+async function loginUser(req, res) {
+    try{
+        const {email, password} = req.body
+        const user = await user.findone({ email })
+        if (user) {
+            const isMatch =await bcrypt.compare(password, user.password)
+            if (isMatch){
+                res.status(200).json({
+                    username: user.username,
+                    email: user.email,
+                    id: user._id,
+                    token: generateToken(user._id)
+                });
+            } else{
+                res.status(401).json({
+                    message:"Ivalid password",
+                });
+
+            } 
+        } else{
+            res.status(401).json({
+                message:"Invalid emmail",
+            });
+        }
+
+    } catch{
+        res.status(400).json({
+            message: "user not found",
+        });
+    }
+}
+module.exports= {createUser,loginUser}

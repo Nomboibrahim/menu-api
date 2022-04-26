@@ -1,8 +1,8 @@
 const { Router } = require("express")
 const  {createFood, getMenu} = require("../controllers/foodController")
-const {protect}=require("../middlewares/authMiddleware")
-const router =Router()
+const {protect,admin}=require("../middlewares/authMiddleware")
+const router =require("express").Router();
 
-router.route("/food").post(protect,createFood).get(protect,getMenu);
+router.route("/").post(protect, admin, createFood).get(protect,getMenu);
 
 module.exports=router
