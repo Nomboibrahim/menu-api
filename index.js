@@ -14,6 +14,7 @@ connectDB()
 
 //Middlewares
 app.use(express.json())
+app.use(morgan)("dev")
 app.use("/api/foods", foodRoute);
 app.use(foodRoute)
 
